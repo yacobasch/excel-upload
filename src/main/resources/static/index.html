@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Excel Upload</title>
+	<link rel="stylesheet" href="app.css">
+</head>
+<body>
+	<main>
+		<header>
+			<h1>Excel to JSON</h1>
+			<p class="muted">Upload an <code>.xls</code> or <code>.xlsx</code> file. Each sheet becomes its own JSON file, named after the sheet. The first row of each sheet is used as column headers.</p>
+		</header>
+
+		<label id="dropzone" class="dropzone" for="file-input">
+			<input id="file-input" type="file" accept=".xls,.xlsx,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet">
+			<span class="dropzone-title">Drop a file here or <u>browse</u></span>
+			<span class="muted small">Max 25 MB</span>
+		</label>
+
+		<div id="status" class="status" role="status" aria-live="polite" hidden></div>
+
+		<section id="files" class="panel" hidden>
+			<div class="toolbar">
+				<div>
+					<strong id="source-name"></strong>
+					<span id="file-count" class="muted"></span>
+				</div>
+				<a id="download-zip" class="button primary" href="#">Download all (.zip)</a>
+			</div>
+			<ul id="file-list" class="file-list"></ul>
+			<p id="expiry" class="muted small"></p>
+		</section>
+
+		<section id="results" hidden>
+			<div class="toolbar">
+				<div>
+					<span class="muted">Preview:</span>
+					<strong id="file-name"></strong>
+					<span id="row-count" class="muted"></span>
+				</div>
+				<div class="actions">
+					<input id="filter" type="search" placeholder="Filter rows…" aria-label="Filter rows">
+					<div class="tabs" role="tablist">
+						<button type="button" role="tab" data-view="table" aria-selected="true">Table</button>
+						<button type="button" role="tab" data-view="json" aria-selected="false">JSON</button>
+					</div>
+					<button type="button" id="copy-json">Copy JSON</button>
+					<button type="button" id="download-csv">Download CSV</button>
+				</div>
+			</div>
+
+			<div id="table-view" class="table-wrap">
+				<table>
+					<thead></thead>
+					<tbody></tbody>
+				</table>
+			</div>
+			<pre id="json-view" hidden></pre>
+		</section>
+	</main>
+	<script src="app.js"></script>
+</body>
+</html>
